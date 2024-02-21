@@ -88,6 +88,8 @@ class MainActivity :
                     gameType = GameType.FLING
                     contentMainBinding.gameBut.text = "Fling"
                 } else {
+                    fling.deactivatePuck() // TODO: Added code
+                    timerActive = false // TODO: Added code
                     gameType = GameType.JUMP
                     contentMainBinding.gameBut.text = "Jump"
                     jump.start()

@@ -23,6 +23,7 @@ class Fling(private val puck: View,
     private var goalBorder = Border.Type.T
     private lateinit var flingAnimationX: FlingAnimation
     private lateinit var flingAnimationY: FlingAnimation
+    private var flingEnd = false // TODO: Added code
 
     private fun placePuck() {
         if (testing) {
@@ -59,7 +60,7 @@ class Fling(private val puck: View,
                 if(goalBorder==Border.Type.S){
                     if(puck.x==puckMinX ){
                         success(goalAchieved)
-                    }else{
+                    }else if (!flingEnd){ // TODO: Added code
                         makeXFlingAnimation(0f,goalAchieved).apply {
                             setMinValue(puckMinX)
                                 .setMaxValue(puckMaxX)
@@ -69,7 +70,7 @@ class Fling(private val puck: View,
                 if(goalBorder==Border.Type.E){
                     if(puck.x==puckMaxX ){
                         success(goalAchieved)
-                    }else{
+                    }else if (!flingEnd){ // TODO: Added code
                         makeXFlingAnimation(0f,goalAchieved).apply {
                             setMinValue(puckMinX)
                                 .setMaxValue(puckMaxX)
@@ -89,7 +90,7 @@ class Fling(private val puck: View,
                 if(goalBorder==Border.Type.T){
                     if(puck.y==puckMinY ){
                         success(goalAchieved)
-                    }else{
+                    }else if (!flingEnd){ // TODO: Added code
                         makeYFlingAnimation(0f,goalAchieved).apply {
                             setMinValue(puckMinY)
                                 .setMaxValue(puckMaxY)
@@ -99,7 +100,7 @@ class Fling(private val puck: View,
                 if(goalBorder==Border.Type.B){
                     if(puck.y==puckMaxY ){
                         success(goalAchieved)
-                    }else{
+                    }else if (!flingEnd){ // TODO: Added code
                         makeYFlingAnimation(0f,goalAchieved).apply {
                             setMinValue(puckMinY)
                                 .setMaxValue(puckMaxY)
@@ -114,6 +115,7 @@ class Fling(private val puck: View,
         // A SimpleOnGestureListener notifies us when the user puts their
         // finger down, and when they edu.utap.edu.utap.fling.
         // Note that here we construct the listener object "on the fly"
+        flingEnd = false // TODO: Added code
         flingAnimationX = makeXFlingAnimation(0f,goalAchieved).apply{
             setMinValue(puckMinX)
                 .setMaxValue(puckMaxX)
@@ -161,6 +163,7 @@ class Fling(private val puck: View,
     fun deactivatePuck() {
         // XXX Write me
         println("deactivatePuck")
+        flingEnd = true // TODO: Added code
         puck.clearAnimation()
         puck.isActivated=false
         border.resetBorderColors()
